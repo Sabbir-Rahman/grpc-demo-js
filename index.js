@@ -15,8 +15,14 @@ server.addService(todoPackage.Todo.service,{
     "readTodos": readTodo
 })
 
+const ToDos = []
 function createTodo (call,callback) {
-    console.log(call)
+    const toDoItem = {
+        "id": ToDos.length + 1,
+        "text": call.request.text
+    }
+    ToDos.push(toDoItem)
+    callback(null, toDoItem)
 }
 
 function readTodo (call,callback) {
