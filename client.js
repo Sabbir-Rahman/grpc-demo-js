@@ -18,3 +18,10 @@ client.createTodo({
 client.readTodos(null, (err,response)=> {
     console.log("Received text from server "+ JSON.stringify(response))
 })
+
+const call = client.readTodosStream()
+call.on("data", item => {
+    console.log("Received from server "+ JSON.stringify(item))
+})
+
+call.on("end", e=> console.log("Server done"))

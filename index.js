@@ -12,7 +12,8 @@ server.bindAsync("0.0.0.0:40000", grpc.ServerCredentials.createInsecure(),functi
    })
 server.addService(todoPackage.Todo.service,{
     "createTodo": createTodo,
-    "readTodos": readTodo
+    "readTodos": readTodo,
+    "readTodosStream": readTodoStream,
 })
 
 const ToDos = []
@@ -23,6 +24,11 @@ function createTodo (call,callback) {
     }
     ToDos.push(toDoItem)
     callback(null, toDoItem)
+}
+
+function readTodoStream (call,callback) {
+    ToDos.forEach(t => call.write(t));
+    call.end();
 }
 
 function readTodo (call,callback) {
