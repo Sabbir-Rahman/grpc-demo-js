@@ -26,6 +26,6 @@ function createTodo (call,callback) {
 }
 
 function readTodo (call,callback) {
-    console.log(call)
+    callback(null, { "items": ToDos})
 }
 
